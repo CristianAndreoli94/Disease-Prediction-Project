@@ -1,0 +1,121 @@
+\documentclass[twocolumn]{class}
+
+
+\addbibresource{References.bib}
+
+% add path to images
+\graphicspath{ {./images/} }
+
+\title{Integrative Network Analysis: \\ Unveiling Symptom-Disease Interactions and Enhancing Predictive Models}
+\shorttitle{Integrative Network Analysis}
+
+\github{https://github.com/DavideLigari01/financial-project}
+
+\author{Andreoli C. • Ligari D. • Alberti A. • Scardovi M. }
+
+\affil[1]{Department of Computer Engineering, Data Science, University of Pavia, Italy \newline\centering Course of Financial Data Science}
+
+\keywords{Graph theory • Features Engineering • Community detection • Null models • Random forest • MLP }
+\abstract{  
+    This study addresses the complex challenge of deciphering the relationships between symptoms and diseases in healthcare, 
+    a crucial aspect for accurate diagnosis and predictive analytics. Employing network analysis, we blend theoretical and empirical
+    approaches to understand these relationships. Our work primarily focuses on exploring complex network configurations,
+    utilizing bipartite models and non-weighted edges to identify significant patterns in disease-symptom interactions.
+    A key aspect of our research is the application of novel metrics, inspired by Hidalgo's works from 2007 and 2009, 
+    to classify symptoms based on their predictive power and diseases based on their symptomatological complexity. These metrics, along with others 
+    like betweenness centrality and community based ones, are instrumental in refining our predictive models and provide a avenue for 
+    computational complexity reduction.\\
+    Building upon this foundation, we delve into predictive modeling, aspiring to surpass existing benchmarks in the field. 
+    Our approach centers on three proven machine learning models—Logistic Regression, Random Forest, and Multi-Layer Perceptron—each chosen
+    for their demonstrated effectiveness in disease prediction using symptomatic data, as evidenced in the studies by Kohli, Singh, and Uddin (2019). 
+    Through this study, we aim to advance the understanding and capabilities in disease prediction, providing valuable insights for the healthcare sector,
+    and to evaluate a graph-based approach for the computational complexity reduction of predictive models.
+}
+\firstauthor{Scardovi Ligari Alberti Andreoli}
+\publicationdate{\today}
+
+
+\begin{document}
+
+\maketitle
+\pagestyle{FirstPage}
+
+\tableofcontents
+% \nocite{dizdar_dns_2021}
+
+% ------------------- START OF SECTIONS -------------------
+
+
+% ------------------- Introduction -------------------
+
+% Introduction to the medical problem and how it is currently addressed (some bibliography)
+\input{./sections/introduction.tex}
+\pagestyle{OtherPage}
+
+% ------------------- Dataset -------------------
+
+% Description of the dataset and its features (some plots and one hot encoding)
+\input{./sections/dataset.tex}
+
+
+% ------------------- Goals -------------------
+
+% Description of the goals of the project:
+\input{./sections/goals.tex}
+% - ML model to predict the disease
+% - Network analysis to find the most important symptoms to reduce complexity, and enhance the available features
+
+
+% ------------------- Methodology and Results Network -------------------
+
+% Methodology used (very technical)
+\input{./sections/methodology_network.tex}
+% - network creation (adjacency matrix - not weighted - bipartite)
+% - hidalgo + significance
+% - communities with co-occurrence matrix
+% - betweenness centrality
+
+\input{./sections/results_network.tex}
+% - degree distribution and power law
+% - most important symptoms/diseases (4 classes) 
+% - communities
+% - L2 has no sense, it's right that z-score low value
+% - Meaning of Z-score
+% - betweenness centrality
+% - clustering coefficient
+
+% ------------------- Methodology and Results ML -------------------
+
+% How we built the ML model 
+\input{./sections/methodology_ML.tex}
+% - Face the unbalanced dataset problem
+% - select best parameters for symptoms one hot only
+% - select best parameters for combination of other features (best combination is chosen with random parameters looking at the accuracy)
+% - Face the problem of normalization
+% - train for each model the two version above with optimal parameters
+% - pick the best model according to accuracy
+
+% Results of the ML model (plots and tables)
+\input{./sections/results_ML.tex}
+% - selected model performances (see which is the worst error or the most commonly misclassified diseases)
+% - Compute accuracy and PR AUC
+% - Compute the accuracy of the model dividing the data into the 4 classes (HighL1 - HighL2, LowL1 - HighL2, ...)
+% - only with one hot symptoms (with optimal parameters both for one hot and other features) 
+% - with new features 
+% - reduction in computational complexity
+
+% ---------------------- Conclusion -----------------------------
+
+\input{./sections/conclusion.tex}
+\input{./sections/future_works.tex}
+% - our approach in feature selection and parameters search is not optimal 
+% - list the possible issues (e.g. we are training model on diverse features with the optimal parameters for other features)
+% - exploit the knowledge of symptoms communities and their most pointed diseases, using it at prior probability for the model classification
+
+\clearpage
+\input{./sections/appendix.tex}
+
+\clearpage
+\printbibliography
+
+\end{document}
